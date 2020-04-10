@@ -79,3 +79,10 @@ input:checked + .slider:before {
   font-family: "Times New Roman", Times, serif;
   list-style-type: none;
 }
+
+#tog{
+  padding:5px;
+  background-color: gray;
+  width: 180px;
+  
+}
