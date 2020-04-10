@@ -86,3 +86,18 @@ input:checked + .slider:before {
   width: 180px;
   
 }
+
+.container{
+  
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  text-align: left;
+  text-align-last: left;
+}
+img{
+  width:100%;
+  height:fit-content; 
+  padding: 0px;
+}
