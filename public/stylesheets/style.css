@@ -102,5 +102,16 @@ img{
   padding: 0px;
 }
 #map { 
-  height: 700px;  width: 1500px
+  height: 700px;  width: 1500px;
+  position: absolute;
+  right: 50px;
+  top: 500px;
   }
+
+.sidebar{
+  width: 200px;
+
+}
+.data_page{
+  height: 700px;
+}
