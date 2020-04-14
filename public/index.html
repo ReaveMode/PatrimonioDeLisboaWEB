@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="javascripts/toggle.js"></script>
+    <script src="javascripts/onLoad.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    
+
+</head>
+
+<body>
+    <div class="container">
+        <img src="/images/lisboa.jpg" alt="">
+    </div>
+    <nav>
+        <ul>
+            <li><button>News</button></li>
+            <li><button id = "login">Login</button></li>
+            <li><button>Contacts</button></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="data_page">
+            <div class="sidebar">
+                <div>
+                    <div class="button">
+                        <ul class="toggle">
+                            <li><label class="switch">
+                                    <input onclick="toggle()" type="checkbox">
+                                    <span class="slider round"></span></label>
+                            </li>
+                            <li>
+                                <p id="tog">Closest To You</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Content">
+                        <div>
+                            <div class="name">
+                                <div>
+                                    <div class="locations">
+                                        <table class="LocTable" style="width:100%">
+                                            <tr>
+                                                <td>Firstname</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lastname</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Age</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="map">
+                <script src="javascripts/leaflet-routing-machine.js"></script>
+                <script src="javascripts/onLoad.js"></script>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
