@@ -22,8 +22,6 @@ window.onload = function () {
                        test.push(L.latLng(result[x].latitude, result[x].longitude))
                        name += result[x].name
                     }
-                    console.log(name)
-                    console.log(result)
                     var waypoints = test;
                     control = L.Routing.control({
                         plan: L.Routing.plan(test, {
@@ -32,7 +30,8 @@ window.onload = function () {
                                 return L.marker(test.latLng, { draggable: false }).bindPopup('Your Current Location').openPopup();
                               }
                               if (x >= 1) {
-                                return L.marker(test.latLng, { draggable: false }).bindPopup(result[x-1].name).openPopup();
+                                return L.marker(test.latLng, { draggable: false }).bindPopup(result[x-1].name + "<br><a href=info.html> More Info </a></br>").openPopup();
+                               
                               }
                             }
                         })
@@ -46,5 +45,19 @@ window.onload = function () {
 
         })
     }
+    $.ajax({
+        url: '/api/POI/location',
+        method: 'get',
+        success: function (result, status) {
+                str = ''
+                locs = document.getElementById("locs")
+                for (x in result) {
+                        str += '<tr><td>'+result[x].name+'</td></tr>'
+                    }
+                locs.innerHTML = str + locs.innerHTML
+        },
+        error: function () {
+            console.log('Error');
+        }
+})
 }
-
