@@ -30,7 +30,7 @@ window.onload = function () {
                                     return L.marker(test.latLng, { draggable: false }).bindPopup('Your Current Location').openPopup();
                                 }
                                 if (x >= 1) {
-                                    return L.marker(test.latLng, { draggable: false }).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x-1].name + "\")'> More Info</p>").openPopup();
+                                    return L.marker(test.latLng, { draggable: false }).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x -1].idPOI + "\")'> More Info</p>").openPopup();
 
                                 }
                             }
@@ -60,13 +60,12 @@ window.onload = function () {
             console.log('Error');
         }
     })
-    /*-----------------------------------load Monument page--------------------------------------*/
-  
-
 }
-
-function saveMonument(name) {
-    localStorage.setItem("name", name)
+/*-----------------------------------load Monument page--------------------------------------*/
+function saveMonument(idPOI) {
+    console.log(idPOI)
+    localStorage.setItem("idPOI", idPOI)
+    console.log(localStorage.getItem("idPOI"))
     window.location.href="info.html"
     
 }
