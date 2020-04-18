@@ -2,7 +2,13 @@
 
 <head>
     <link rel='stylesheet' href='/stylesheets/info.css' />
-    <script src="javascripts/onLoad.js"></script>
+    <script src="javascripts/moreInfo.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 </head>
 
 <body>
@@ -12,33 +18,37 @@
     <nav>
         <ul>
             <li><button>News</button></li>
-            <li><button id = "login">Login</button></li>
+            <li><button id="login">Login</button></li>
             <li><button>Contacts</button></li>
         </ul>
     </nav>
     <main>
         <div class="data_page">
+            <div class = "Title">
+              <div class="locName" id="locName">
+
+                </div>
+            </div>
+            
             <div class="images">
                 <div>
                     <div class="Content">
-                        <img src="https://github.com/ReaveMode/Images/blob/master/mac-miller-slapboxin-questnaija-beatspice.jpg?raw=true" alt="">
+                        <img src="https://github.com/ReaveMode/Images/blob/master/mac-miller-slapboxin-questnaija-beatspice.jpg?raw=true"
+                            alt="">
                     </div>
                 </div>
             </div>
-            <div class = "description">
-                <div class = "locName" id = "locName">
+            <div class="description">
+                <div class="text" id="locText">
 
                 </div>
-                <div class = "text" id = "locText">
-                    <p>this is a test</p>
-                </div>
             </div>
-            <div class = "comments">
+            <div class="comments">
                 <t>Comments: </t>
                 <br></br>
-                <div class = "locComm" id = "locComm">
+                <div class="locComm" id="locComm">
                     <p>This is also a test</p>
-                </div>    
+                </div>
             </div>
         </div>
     </main>

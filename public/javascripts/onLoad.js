@@ -18,21 +18,21 @@ window.onload = function () {
                 method: 'get',
                 success: function (result, status) {
                     var test = [L.latLng(position.coords.latitude, position.coords.longitude)];
-                    for (x in result){
-                       test.push(L.latLng(result[x].latitude, result[x].longitude))
-                       name += result[x].name
+                    for (x in result) {
+                        test.push(L.latLng(result[x].latitude, result[x].longitude))
+                        
                     }
                     var waypoints = test;
                     control = L.Routing.control({
                         plan: L.Routing.plan(test, {
                             createMarker: function (x, test, nWps) {
-                              if (x == 0) {
-                                return L.marker(test.latLng, { draggable: false }).bindPopup('Your Current Location').openPopup();
-                              }
-                              if (x >= 1) {
-                                return L.marker(test.latLng, { draggable: false }).bindPopup(result[x-1].name + "<br><a href=info.html> More Info </a></br>").openPopup();
-                               
-                              }
+                                if (x == 0) {
+                                    return L.marker(test.latLng, { draggable: false }).bindPopup('Your Current Location').openPopup();
+                                }
+                                if (x >= 1) {
+                                    return L.marker(test.latLng, { draggable: false }).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x-1].name + "\")'> More Info</p>").openPopup();
+
+                                }
                             }
                         })
 
@@ -42,22 +42,31 @@ window.onload = function () {
                     console.log(errorThrown);
                 }
             })
-
         })
     }
+    /*-----------------------add names to side table-------------------------*/
     $.ajax({
         url: '/api/POI/location',
         method: 'get',
         success: function (result, status) {
-                str = ''
-                locs = document.getElementById("locs")
-                for (x in result) {
-                        str += '<tr><td>'+result[x].name+'</td></tr>'
-                    }
-                locs.innerHTML = str + locs.innerHTML
+            str = ''
+            locs = document.getElementById("locs")
+            for (x in result) {
+                str += '<tr><td>' + result[x].name + '</td></tr>'
+            }
+            locs.innerHTML = str + locs.innerHTML
         },
         error: function () {
             console.log('Error');
         }
-})
+    })
+    /*-----------------------------------load Monument page--------------------------------------*/
+  
+
+}
+
+function saveMonument(name) {
+    localStorage.setItem("name", name)
+    window.location.href="info.html"
+    
 }

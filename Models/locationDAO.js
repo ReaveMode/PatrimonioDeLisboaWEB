@@ -21,7 +21,7 @@ module.exports.getLatLong = function (callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("select name, longitude, latitude from POI", function (err, rows) {
+        else conn.query("select name, longitude, latitude, description from POI", function (err, rows) {
             conn.release();
             callback(rows);
         })
