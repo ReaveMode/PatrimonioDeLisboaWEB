@@ -20,7 +20,18 @@ router.get('/', function(req, res, next) {
       res.send(result);
     });
   });
-  
+
+  router.get('/comms', function(req, res, next) {
+    id.getComms(function(result){
+      res.send(result);
+    });
+  });
+
+  router.get('/ratings', function(req, res, next) {
+    id.getRatings(function(result){
+      res.send(result);
+    });
+  });
 
 
 

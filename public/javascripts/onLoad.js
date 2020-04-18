@@ -20,7 +20,7 @@ window.onload = function () {
                     var test = [L.latLng(position.coords.latitude, position.coords.longitude)];
                     for (x in result) {
                         test.push(L.latLng(result[x].latitude, result[x].longitude))
-                        
+
                     }
                     var waypoints = test;
                     control = L.Routing.control({
@@ -30,8 +30,8 @@ window.onload = function () {
                                     return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').openPopup();
                                 }
                                 if (x >= 1) {
-                                    
-                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50}).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x -1].idPOI + "\")'> More Info</p>").openPopup();
+
+                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x - 1].idPOI + "\")'> More Info</p>").openPopup();
 
                                 }
                             }
@@ -62,11 +62,11 @@ window.onload = function () {
         }
     })
 }
-/*-----------------------------------load Monument page--------------------------------------*/
+/*-----------------------------------save Monument  ID for next page--------------------------------------*/
 function saveMonument(idPOI) {
     console.log(idPOI)
     localStorage.setItem("idPOI", idPOI)
     console.log(localStorage.getItem("idPOI"))
-    window.location.href="info.html"
-    
+    window.location.href = "info.html"
+
 }
