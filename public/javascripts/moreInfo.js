@@ -9,7 +9,7 @@ window.onload = function () {
             console.log(localStorage.getItem("idPOI"));
             for (x in result) {
                 if (result[x].idPOI == localStorage.getItem("idPOI"))
-                    str = '<p>' + result[x].name + '</p>'
+                    str = '<h1>' + result[x].name + '</h1>'
             }
             locName.innerHTML = str
         },

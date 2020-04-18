@@ -27,10 +27,11 @@ window.onload = function () {
                         plan: L.Routing.plan(test, {
                             createMarker: function (x, test, nWps) {
                                 if (x == 0) {
-                                    return L.marker(test.latLng, { draggable: false }).bindPopup('Your Current Location').openPopup();
+                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').openPopup();
                                 }
                                 if (x >= 1) {
-                                    return L.marker(test.latLng, { draggable: false }).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x -1].idPOI + "\")'> More Info</p>").openPopup();
+                                    
+                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50}).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x -1].idPOI + "\")'> More Info</p>").openPopup();
 
                                 }
                             }

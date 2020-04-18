@@ -126,7 +126,7 @@ nav ul{
     background-repeat: no-repeat;
     display: flex;
   }
-  .card:hover {
+  .card img:hover {
     opacity: 0.7;
   }
   .row {
