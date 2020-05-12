@@ -56,6 +56,20 @@ module.exports.getComms = function (callback, next) {
     })
 }
 
+module.exports.getUsers = function (callback, next) {
+
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("select idUser, name, email, password, country, img, location from User", function (err, rows) {
+            conn.release();
+            callback(rows);
+        })
+    })
+}
+
 module.exports.getRatings = function (callback, next) {
 
     location.getConnection(function (err, conn) {
