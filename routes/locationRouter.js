@@ -33,12 +33,7 @@ router.get('/', function(req, res, next) {
     });
   });
 
-  router.get('/users', function(req, res, next) {
-    id.getUsers(function(result){
-      res.send(result);
-    });
-  });
-
+  
 
 
 
