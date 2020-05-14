@@ -5,7 +5,8 @@ var test = [];
 var name;
 
 window.onload = function () {
-
+    console.log(sessionStorage.getItem("username"))
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 8);

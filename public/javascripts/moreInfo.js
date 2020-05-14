@@ -6,7 +6,7 @@ window.onload = function () {
         method: 'get',
         success: function (result, status) {
             str = ''
-            locName = document.getElementById("locName");
+            locName = document.getElementById("Name");
             console.log(localStorage.getItem("idPOI"));
             for (x in result) {
                 if (result[x].idPOI == localStorage.getItem("idPOI"))
@@ -24,7 +24,7 @@ window.onload = function () {
         method: 'get',
         success: function (result, status) {
             str = ''
-            locText = document.getElementById("locText");
+            locText = document.getElementById("Text");
             console.log(localStorage.getItem("idPOI"));
             for (x in result) {
                 if (result[x].idPOI == localStorage.getItem("idPOI"))
@@ -42,58 +42,48 @@ window.onload = function () {
         method: 'get',
         success: function (result, status) {
             str = ''
-            card = document.getElementById("imgPlace");
+            ImgCard = document.getElementById("imgPlace");
             console.log(localStorage.getItem("idPOI"));
             for (x in result) {
                 if (result[x].POI_idPOI == localStorage.getItem("idPOI")) {
                     str += '<img src ="' + result[x].url + '" id ="cards">'
                 }
             }
-            card.innerHTML += str
+            ImgCard.innerHTML += str
         },
         error: function () {
             console.log('Error');
         }
     })
     /*-----------------------------------load POI comments by ID--------------------------------------*/
+    var id = localStorage.getItem("idPOI");
     $.ajax({
-        url: '/api/POI/comms',
+        url: '/api/POI/comms/' + id,
         method: 'get',
         success: function (result, status) {
-            str = ''
-            card = document.getElementById("locComm");
-            console.log(localStorage.getItem("idPOI"));
-            for (x in result) {
-                if (result[x].POI_idPOI == localStorage.getItem("idPOI")) {
-                    str += '<p>' + result[x].comment + '</p>'
-                    
-                }
-            }
-            card.innerHTML += str
+            
+            CommCard = document.getElementById("Comm");
+            var first = result;
+                    $.ajax({
+                        url: '/api/POI/ratings/' + id,
+                        method: 'get',
+                        success: function (result, status) {
+                            str = ''
+                            var second = result;
+                            console.log(first);
+                            for (x in second) {
+                                     str += '<h2>'+ second[x].name +" - "+ second[x].rating +'</h2>' + '<p>' + first[x].comment + '</p></br>'
+                            }   
+                            CommCard.innerHTML += str
+                        },
+                        error: function () {
+                            console.log('Error');
+                        }
+                    })   
         },
         error: function () {
             console.log('Error');
         }
     })
-    /*-----------------------------------load POI ratings by ID--------------------------------------*/
-    $.ajax({
-        url: '/api/POI/ratings',
-        method: 'get',
-        success: function (result, status) {
-            str = ''
-            card = document.getElementById("locComm");
-            console.log(localStorage.getItem("idPOI"));
-            for (x in result) {
-                if (result[x].POI_idPOI == localStorage.getItem("idPOI")) {
-                    str += '<h2>' + result[x].rating +'</h2>'
-                }
-            }   
-            card.innerHTML += str
-        },
-        error: function () {
-            console.log('Error');
-        }
-    })
-
 
 }

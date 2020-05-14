@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-    
+
 
 </head>
 
@@ -19,10 +19,26 @@
     </div>
     <nav>
         <ul>
-            <li><button><a href ="itinerary.html">Itinerary</a></button></li>
-            <li><button id = "login">Login</button></li>
-            <li><button>Contacts</button></li>
+            <li><button id="itinerary"><a href="itinerary.html">Itinerary</a></button></li>
+            <li><button id="login"><a href="login.html">Login</a></button></li>
+            <li><button id="profile"><a href="profile.html">Profile</a></button></li>
         </ul>
+        <script>
+            $(document).ready(function () {
+                var session = sessionStorage.getItem("username");
+                if (session == null) {
+                    $("#profile").hide();
+                    $("#itinerary").hide();
+                    $("#login").show();
+                } else {
+                    $("#profile").show();
+                    $("#itinerary").show();
+                    $("#login").hide();
+                }
+            });
+
+        </script>
+
     </nav>
     <main>
         <div class="data_page">
@@ -44,8 +60,8 @@
                             <div class="name">
                                 <div>
                                     <div class="locations">
-                                        <table id ="locs" class="LocTable" style="width:100%">
-                                            
+                                        <table id="locs" class="LocTable" style="width:100%">
+
                                         </table>
                                     </div>
                                 </div>

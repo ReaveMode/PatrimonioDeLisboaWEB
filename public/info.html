@@ -17,46 +17,60 @@
     </div>
     <nav>
         <ul>
-            <li><button><a href ="itinerary.html">Itinerary</a></button></li>
-            <li><button id="login">Login</button></li>
-            <li><button>Contacts</button></li>
+            <li><button id ="home"><a href="index.html">Home</a></button></li>
+            <li><button id="itinerary"><a href="itinerary.html">Itinerary</a></button></li>
+            <li><button id="profile"><a href="profile.html">Profile</a></button></li>
+            <li><button id="login"><a href="login.html">Login</a></button></li>
+            
         </ul>
+        <script>
+            $(document).ready(function () {
+                var session = sessionStorage.getItem("username");
+                if (session == null) {
+                    $("#profile").hide();
+                    $("#itinerary").hide();
+                    $("#login").show();
+                } else {
+                    $("#profile").show();
+                    $("#itinerary").show();
+                    $("#login").hide();
+                }
+            });
+
+        </script>
     </nav>
     <main>
         <div class="data_page">
-            <div class = "Title">
-              <div class="locName" id="locName">
+            <div class="Title">
+                <div class="locName" id="Name">
 
                 </div>
             </div>
-            
+
             <div class="images">
-                <div class = "row">
-                    <div class="Content" id = "card">
-                        <div class = "card" id = "imgPlace">
+                <div class="row">
+                    <div class="Content" id="card">
+                        <div class="card" id="imgPlace">
 
                         </div>
                     </div>
                 </div>
             </div>
             <div class="description">
-                <div class="text" id="locText">
+                <div class="text" id="Text">
 
                 </div>
             </div>
-            <div class = "itinerary">
-                <div class = "addTo">
+            <div class="itinerary">
+                <div class="addTo">
                     <button type="button">Add To Itinerary</button>
                 </div>
             </div>
             <div class="comments">
                 <h1>Comments: </h1>
-                <br></br>
-                <div class = "locRating" id ="locRating">
+                <br>
+                <div class="locComm" id="Comm">
 
-                </div>
-                <div class="locComm" id="locComm">
-                    
                 </div>
             </div>
         </div>

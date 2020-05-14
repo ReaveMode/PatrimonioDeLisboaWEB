@@ -42,16 +42,21 @@ module.exports.getIMG = function (callback, next) {
     })
 }
 
-module.exports.getComms = function (callback, next) {
+module.exports.getComms = function (ids, callback, next) {
 
     location.getConnection(function (err, conn) {
         if (err) {
             conn.release();
             next(err);
         }
-        else conn.query("select idPOI_comm, comment, POI_idPOI from POI_comm", function (err, rows) {
+        else conn.query("select idPOI_comm, comment from POI_comm where POI_idPOI = ?", ids, function (err, rows) {
             conn.release();
-            callback(rows);
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "POI not found!" }, null);
+            }
         })
     })
 }
@@ -63,23 +68,47 @@ module.exports.getUsers = function (callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("select idUser, name, email, password, country, img, location from User", function (err, rows) {
+        else conn.query("select * from User", function (err, rows) {
             conn.release();
             callback(rows);
         })
     })
 }
 
-module.exports.getRatings = function (callback, next) {
+module.exports.getRatings = function (ids, callback, next) {
 
     location.getConnection(function (err, conn) {
         if (err) {
             conn.release();
             next(err);
         }
-        else conn.query("select rating, POI_idPOI from POI_rating", function (err, rows) {
+        else conn.query("select name, idPOI_rating, rating from POI_rating, User where User_idUser= idUser and POI_idPOI = ?", ids, function (err, rows) {
             conn.release();
-            callback(rows);
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "POI not found!" }, null);
+            }
         })
     })
 }
+
+module.exports.login = function (obj, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("Select email,password from User where email=? and password=?", [obj.email, obj.password], function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "User or password incorrects" }, null);
+            }
+        })
+    })
+}
+

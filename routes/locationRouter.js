@@ -21,19 +21,31 @@ router.get('/', function(req, res, next) {
     });
   });
 
-  router.get('/comms', function(req, res, next) {
-    id.getComms(function(result){
-      res.send(result);
+  router.get('/comms/:ids', function (req, res, next) {
+    var ids = req.params.ids
+    id.getComms(ids, function (status, result) {
+      if (status.code == 200)
+        res.send(result);
+      else {
+        res.statusMessage = status.status;
+        res.status(status.code).send({});
+      }
     });
   });
+    
 
-  router.get('/ratings', function(req, res, next) {
-    id.getRatings(function(result){
-      res.send(result);
+  router.get('/ratings/:ids', function (req, res, next) {
+    var ids = req.params.ids
+    id.getRatings(ids, function (status, result) {
+      if (status.code == 200)
+        res.send(result);
+      else {
+        res.statusMessage = status.status;
+        res.status(status.code).send({});
+      }
     });
   });
-
-  
+    
 
 
 
