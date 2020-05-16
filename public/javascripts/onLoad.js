@@ -71,3 +71,23 @@ function saveMonument(idPOI) {
     window.location.href = "info.html"
 
 }
+/*---------------------------------- get monument ID by name --------------------------------------------*/
+function procurar(){
+    nome = document.getElementById("myInput").value
+    $.ajax({
+        url: '/api/POI/location',
+        method: 'get',
+        success: function (result, status) {
+           for (x in result){
+               if (nome == result[x].name){
+                   saveMonument(result[x].idPOI)
+               }
+           }
+            
+        },
+        error: function () {
+            console.log('Error');
+        }
+    })
+
+}
