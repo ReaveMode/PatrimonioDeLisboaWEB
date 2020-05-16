@@ -9,7 +9,7 @@ window.onload = function () {
     
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 8);
+            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 16);
             var attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
             var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             var tiles = L.tileLayer(tileUrl, { attribution });
@@ -28,7 +28,7 @@ window.onload = function () {
                         plan: L.Routing.plan(test, {
                             createMarker: function (x, test, nWps) {
                                 if (x == 0) {
-                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').openPopup();
+                                    return L.circle(test.latLng, { draggable: false, color: 'Blue', fillColor: '#00008B', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').openPopup();
                                 }
                                 if (x >= 1) {
 

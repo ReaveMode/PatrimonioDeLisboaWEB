@@ -22,4 +22,32 @@ router.post('/login', function (req, res, next) {
   });
 });
 
+router.get('/:idUser', function (req, res, next) {
+  var idUser = req.params.idUser
+  id.getId(idUser, function (status, result) {
+    if (status.code == 200)
+      res.send(result);
+    else {
+      res.statusMessage = status.status;
+      res.status(status.code).send({});
+    }
+  });
+});
+router.post('/register', function (req, res, next) {
+  id.register(req.body, function (status, result) {
+    if (status.code == 200)
+      res.send(result);
+    else {
+      res.statusMessage = status.status;
+      res.status(status.code).send({});
+    }
+  });
+});
+
+
+
+
+
+
+
 module.exports = router;

@@ -20,3 +20,27 @@ function entrar(){
         }
     })
 }
+
+function registar(){
+    $.ajax({
+        url: 'api/users/register',
+        method: 'post',
+        data:{
+            name:document.getElementById("name").value,
+            email:document.getElementById("email").value,
+            password:document.getElementById("pass").value,
+            country:document.getElementById("country").value,
+            
+        },
+        success: function(result,status){
+            alert('Registou com sucesso!')
+            window.location = "login.html";
+        },
+        error: function(jqXHR,textStatus,errorThrown ){
+            alert("Oops... Inseriu dados inválidos! :(")
+            console.log(errorThrown);
+        }
+    })
+
+
+}

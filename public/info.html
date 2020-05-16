@@ -17,11 +17,11 @@
     </div>
     <nav>
         <ul>
-            <li><button id ="home"><a href="index.html">Home</a></button></li>
+            <li><button id="home"><a href="index.html">Home</a></button></li>
             <li><button id="itinerary"><a href="itinerary.html">Itinerary</a></button></li>
             <li><button id="profile"><a href="profile.html">Profile</a></button></li>
             <li><button id="login"><a href="login.html">Login</a></button></li>
-            
+
         </ul>
         <script>
             $(document).ready(function () {
@@ -30,10 +30,12 @@
                     $("#profile").hide();
                     $("#itinerary").hide();
                     $("#login").show();
+                    $("#addToItin").hide();
                 } else {
                     $("#profile").show();
                     $("#itinerary").show();
                     $("#login").hide();
+                    $("#addToItin").show();
                 }
             });
 
@@ -63,14 +65,22 @@
             </div>
             <div class="itinerary">
                 <div class="addTo">
-                    <button type="button">Add To Itinerary</button>
+                    </br>
+                    <button type="button" id="addToItin">Add To Itinerary</button>
                 </div>
             </div>
             <div class="comments">
                 <h1>Comments: </h1>
-                <br>
-                <div class="locComm" id="Comm">
 
+                <div class="locComm" id="Comm">
+                    <div class="addComm" id="addComm">
+                        <div id="usrform"> Rating: <input id ="rating" type="text" name="rating"><input type="submit" onclick="comentario()">
+                        </div>
+                        <br>
+                        <textarea id = "comentario" rows="4" cols="50" name="comment" form="usrform"> </textarea>
+                        <p>Qualquer comentário poderá ajudar a melhorar a perspetiva do local para outros utilizadores!</p>
+                    </div>
+                    </br>
                 </div>
             </div>
         </div>

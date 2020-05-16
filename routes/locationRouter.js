@@ -45,6 +45,28 @@ router.get('/', function(req, res, next) {
       }
     });
   });
+
+  router.post('/rating', function (req, res, next) {
+    id.postRating(req.body, function (status, result) {
+      if (status.code == 200)
+        res.send(result);
+      else {
+        res.statusMessage = status.status;
+        res.status(status.code).send({});
+      }
+    });
+  });
+
+  router.post('/comentario', function (req, res, next) {
+    id.postComment(req.body, function (status, result) {
+      if (status.code == 200)
+        res.send(result);
+      else {
+        res.statusMessage = status.status;
+        res.status(status.code).send({});
+      }
+    });
+  });
     
 
 

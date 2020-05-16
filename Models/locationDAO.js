@@ -82,7 +82,7 @@ module.exports.getRatings = function (ids, callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("select name, idPOI_rating, rating from POI_rating, User where User_idUser= idUser and POI_idPOI = ?", ids, function (err, rows) {
+        else conn.query("select name, idPOI_rating, rating from POI_rating, User where User_idUser= idUser and POI_idPOI = ? order by idPOI_rating asc", ids, function (err, rows) {
             conn.release();
             if (!(rows.length === 0)) {
                 callback({ code: 200, status: "Ok" }, rows);
@@ -112,3 +112,78 @@ module.exports.login = function (obj, callback, next) {
     })
 }
 
+
+
+module.exports.postComment = function (obj, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("insert into POI_comm (comment,POI_idPOI,User_idUser) values (?,?,?) ", [obj.comment, obj.idPOI, obj.idUser], function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "User or password incorrects" }, null);
+            }
+        })
+    })
+}
+
+module.exports.postRating = function (obj, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("insert into POI_rating (rating,POI_idPOI,User_idUser) values (?,?,?) ", [obj.rating, obj.idPOI, obj.idUser], function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "User or password incorrects" }, null);
+            }
+        })
+    })
+}
+
+
+module.exports.getId = function (idUser, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("SELECT idUser from User where email = ?", idUser, function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "User or password incorrects" }, null);
+            }
+        })
+    })
+}
+
+
+module.exports.register = function (obj, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("insert into User (name,email,password, country) values (?,?,?,?)", [obj.name, obj.email, obj.password, obj.country], function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "User or password incorrects" }, null);
+            }
+        })
+    })
+}
