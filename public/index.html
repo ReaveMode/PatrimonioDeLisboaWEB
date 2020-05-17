@@ -2,7 +2,6 @@
 
 <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="javascripts/toggle.js"></script>
     <script src="javascripts/onLoad.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
@@ -17,6 +16,7 @@
     <div class="container">
         <img src="/images/lisboa.jpg" alt="">
     </div>
+    <div class ="nav">
     <nav>
         <ul>
             <li><button id="itinerary"><a href="itinerary.html">Itinerary</a></button></li>
@@ -24,6 +24,7 @@
             <li><button id="profile"><a href="profile.html">Profile</a></button></li>
 
         </ul>
+    </div>
         <script>
             $(document).ready(function () {
                 var session = sessionStorage.getItem("username");
@@ -61,7 +62,7 @@
                             <div class="name">
                                 <div>
                                     <div class="locations">
-                                        <table id="locs" class="LocTable" style="width:100%">
+                                        <table id="locs" class="LocTable">
 
                                         </table>
                                     </div>

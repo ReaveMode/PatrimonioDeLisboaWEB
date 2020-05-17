@@ -126,7 +126,7 @@ module.exports.postComment = function (obj, callback, next) {
                 callback({ code: 200, status: "Ok" }, rows);
             }
             else {
-                callback({ code: 401, status: "User or password incorrects" }, null);
+                callback({ code: 401, status: "Comment failed" }, null);
             }
         })
     })
@@ -144,7 +144,7 @@ module.exports.postRating = function (obj, callback, next) {
                 callback({ code: 200, status: "Ok" }, rows);
             }
             else {
-                callback({ code: 401, status: "User or password incorrects" }, null);
+                callback({ code: 401, status: "Rating failed" }, null);
             }
         })
     })
@@ -163,7 +163,7 @@ module.exports.getId = function (idUser, callback, next) {
                 callback({ code: 200, status: "Ok" }, rows);
             }
             else {
-                callback({ code: 401, status: "User or password incorrects" }, null);
+                callback({ code: 401, status: "User not found" }, null);
             }
         })
     })
@@ -182,8 +182,23 @@ module.exports.register = function (obj, callback, next) {
                 callback({ code: 200, status: "Ok" }, rows);
             }
             else {
-                callback({ code: 401, status: "User or password incorrects" }, null);
+                callback({ code: 401, status: "Invalid data input" }, null);
             }
+        })
+    })
+}
+
+
+module.exports.getAvg = function (callback, next) {
+
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("SELECT AVG(rating) as media, POI_idPOI, name from POI_rating, POI where POI_idPOI=idPOI GROUP BY POI_idPOI order by media desc", function (err, rows) {
+            conn.release();
+            callback(rows);
         })
     })
 }

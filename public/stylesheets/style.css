@@ -1,7 +1,8 @@
 
 nav ul{
+  margin:00px;
   font-size: 20px;
-  padding: -10px;
+  padding: 10px;
   font-family: "Times New Roman", Times, serif;
   list-style-type: none;
 }
@@ -9,13 +10,25 @@ nav ul{
 nav ul li{
   display: inline;
   padding: 10px;
+  
 }
 body {
-  padding: 50px;
+  padding: 0px;
+  background-color: whitesmoke;
+  margin: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   /*background-image: url("/images/lisboa.jpg");*/
 }
-
+.container{
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    
+}
+.nav{
+  background-color: darkgoldenrod;
+  padding:0px;
+}
 a {
   color: #00B7FF;
 }
@@ -203,4 +216,12 @@ img{
 
 .btn-group button:hover {
   background-color: #3e8e41;
+}
+
+#locs{
+  width: 300px;
+}
+
+#tog{
+  width:280px;
 }

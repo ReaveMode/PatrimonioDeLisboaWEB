@@ -68,8 +68,12 @@ router.get('/', function(req, res, next) {
     });
   });
     
-
-
+  router.get('/AvgRating', function(req, res, next) {
+    id.getAvg(function(result, status){
+        res.send(result);
+    });
+  });
+  
 
 
 

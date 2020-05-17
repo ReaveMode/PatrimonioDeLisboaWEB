@@ -3,12 +3,16 @@ var control;
 var been_routed = true;
 var test = [];
 var name;
-
+var latUser;
+var longUser;
+var locations = [];
 window.onload = function () {
     console.log(sessionStorage.getItem("username"))
-    
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
+            latUser = position.coords.latitude;
+            longUser = position.coords.longitude;
             var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 16);
             var attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
             var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -46,17 +50,28 @@ window.onload = function () {
             })
         })
     }
-    /*-----------------------add names to side table-------------------------*/
+
+/*-----------------------add names to side table-------------------------*/
+
     $.ajax({
         url: '/api/POI/location',
         method: 'get',
         success: function (result, status) {
+            console.log(latUser + " " + longUser);
             str = ''
             locs = document.getElementById("locs")
             for (x in result) {
-                str += '<tr><td>' + result[x].name + '</td></tr>'
+                locations.push([result[x].name, getDistance(latUser, longUser, result[x].latitude, result[x].longitude)])
             }
-            locs.innerHTML = str + locs.innerHTML
+            locations.sort(function (a, b) {
+                return a[1] - b[1];
+            });
+            for (x in locations) {
+                str += '<tr><td>' + locations[x] + ' Km</td></tr>'
+            }
+
+            locs.innerHTML = str 
+            console.log(locations)
         },
         error: function () {
             console.log('Error');
@@ -72,22 +87,98 @@ function saveMonument(idPOI) {
 
 }
 /*---------------------------------- get monument ID by name --------------------------------------------*/
-function procurar(){
+function procurar() {
     nome = document.getElementById("myInput").value
     $.ajax({
         url: '/api/POI/location',
         method: 'get',
         success: function (result, status) {
-           for (x in result){
-               if (nome == result[x].name){
-                   saveMonument(result[x].idPOI)
-               }
-           }
-            
+            for (x in result) {
+                if (nome == result[x].name) {
+                    saveMonument(result[x].idPOI)
+                }
+            }
+
         },
         error: function () {
             console.log('Error');
         }
     })
 
+}
+
+
+/*------------------------ calculate distance in KM----------------------------*/
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    var final = Math.round(d * 100) / 100
+    console.log(final);
+    return final;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
+}
+
+/*-----------------------add names to side table pt.2-------------------------*/
+
+function toggle() {
+    var x = document.getElementById("tog");
+    if (document.getElementById("tog").innerHTML === "Closest To You") { 
+        $.ajax({
+            url: '/api/POI/AvgRating',
+            method: 'get',
+            success: function (result, status) {
+                locs = document.getElementById("locs")
+                str = ''
+                for (x in result) {
+                    str += '<tr><td><a onclick="saveMonument(\''+result[x].POI_idPOI+ '\')">' + result[x].name +'</a> - '+ Math.round(result[x].media * 100) / 100 +'⭐</td></tr>'
+                }
+                locs.innerHTML = str
+                console.log(result)
+            },
+            error: function () {
+                console.log('Error');
+            }
+        })
+    document.getElementById("tog").innerHTML = "Top Rated";
+    } else {
+        x.innerHTML = "Closest To You";
+        $.ajax({
+            url: '/api/POI/location',
+            method: 'get',
+            success: function (result, status) {
+                var newLocs=[];
+                console.log(latUser + " " + longUser);
+                str = ''
+                locs = document.getElementById("locs")
+                for (x in result) {
+                    newLocs.push([result[x].name, getDistance(latUser, longUser, result[x].latitude, result[x].longitude)])
+                }
+                newLocs.sort(function (a, b) {
+                    return a[1] - b[1];
+                });
+                for (x in newLocs) {
+                    str += '<tr><td>' + newLocs[x] + ' Km</td></tr>'
+                }
+
+                locs.innerHTML = str 
+                console.log(locations)
+            },
+            error: function () {
+                console.log('Error');
+            }
+        })
+    }
+    console.log(document.getElementById("tog"))
 }
