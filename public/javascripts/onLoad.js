@@ -80,7 +80,7 @@ window.onload = function () {
                 return x[2];
             });
             for (x in newLocs) {
-                str += '<tr><td><a style="color:darkgrey; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +"</a> - "+ arrayTitle3[x]+ ' Km</td></tr>'
+                str += '<tr><td style="color:darkred; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +'</a> - '+ arrayTitle3[x]+ ' Km</td></tr>'
                 console.log(result[x].idPOI)
             }
 
@@ -157,7 +157,7 @@ function toggle() {
                 locs = document.getElementById("locs")
                 str = ''
                 for (x in result) {
-                    str += '<tr><td><a style="color:darkgrey; cursor:pointer" onclick="saveMonument(\'' + result[x].POI_idPOI + '\')">' + result[x].name + '</a> - ' + Math.round(result[x].media * 100) / 100 + '⭐</td></tr>'
+                    str += '<tr><td style="color: darkgoldenrod; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + result[x].POI_idPOI + '\')">' + result[x].name + '</a> - ' + Math.round(result[x].media * 100) / 100 + '⭐</td></tr>'
                 }
                 locs.innerHTML = str
                 console.log(result)
@@ -195,7 +195,7 @@ function toggle() {
                     return x[2];
                 });
                 for (x in newLocs) {
-                    str += '<tr><td><a style="color:darkgrey; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +"</a> - "+ arrayTitle3[x]+ ' Km</td></tr>'
+                    str += '<tr><td style="color:darkred; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +'</a> - '+ arrayTitle3[x]+ ' Km</td></tr>'
                     console.log(result[x].idPOI)
                 }
 
