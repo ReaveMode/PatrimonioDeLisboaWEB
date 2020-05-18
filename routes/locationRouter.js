@@ -75,6 +75,17 @@ router.get('/', function(req, res, next) {
   });
   
 
+  router.get('/allRatings', function(req, res, next) {
+    id.getAllRatings(function(result, status){
+        res.send(result);
+    });
+  });
+  router.get('/allComments', function(req, res, next) {
+    id.getAllComments(function(result, status){
+        res.send(result);
+    });
+  });
+  
 
 
 

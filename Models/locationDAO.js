@@ -202,3 +202,31 @@ module.exports.getAvg = function (callback, next) {
         })
     })
 }
+
+module.exports.getAllRatings = function (callback, next) {
+
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("select * from POI_rating", function (err, rows) {
+            conn.release();
+            callback(rows);
+        })
+    })
+}
+
+module.exports.getAllComments = function (callback, next) {
+
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("select * from POI_comm", function (err, rows) {
+            conn.release();
+            callback(rows);
+        })
+    })
+}
