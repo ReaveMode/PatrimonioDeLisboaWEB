@@ -3,7 +3,7 @@ var idUser;
 
 window.onload = function () {
     /*-----------------------------------load POI name by Id--------------------------------------*/
-    console.log("boas manos");
+    
     $.ajax({
         url: '/api/POI/location',
         method: 'get',
@@ -114,7 +114,7 @@ $.ajax({
 /*---------------------------------------Comment----------------------------------*/
 
 function comentario(){
-    console.log("alors on dance")
+    
     $.ajax({
         url: 'api/POI/comentario',
         method: 'post',

@@ -21,7 +21,7 @@ module.exports.getLatLong = function (callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("select idPOI, name, longitude, latitude, description, img from POI", function (err, rows) {
+        else conn.query("select idPOI, name, img,longitude, latitude, description, img from POI", function (err, rows) {
             conn.release();
             callback(rows);
         })
@@ -157,7 +157,7 @@ module.exports.getId = function (idUser, callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("SELECT idUser from User where email = ?", idUser, function (err, rows) {
+        else conn.query("SELECT idUser, name, email, country from User where email = ?", idUser, function (err, rows) {
             conn.release();
             if (!(rows.length === 0)) {
                 callback({ code: 200, status: "Ok" }, rows);
@@ -230,3 +230,20 @@ module.exports.getAllComments = function (callback, next) {
         })
     })
 }
+
+module.exports.updateUser = function (obj, callback, next) {
+
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("UPDATE User set email = ?, country = ? where idUser = ?",[obj.email, obj.country, obj.idUser], function (err, rows) {
+            conn.release();
+            callback(rows);
+        })
+    })
+}
+
+
+

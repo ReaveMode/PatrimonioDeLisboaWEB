@@ -6,6 +6,7 @@ var name;
 var latUser;
 var longUser;
 var locations = [];
+
 window.onload = function () {
     console.log(sessionStorage.getItem("username"))
 
@@ -36,7 +37,7 @@ window.onload = function () {
                                 }
                                 if (x >= 1) {
 
-                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<p id ='namesss'>" + result[x - 1].name + "</p>" + "<p id ='loc' onclick = 'saveMonument(\"" + result[x - 1].idPOI + "\")'> More Info</p>").openPopup();
+                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<img src="+ result[x-1].img+" style='width:200px; height:100px;'><h2 id ='namesss'>" + result[x - 1].name + "</h2>" + "<button id ='loc' onclick = 'saveMonument(\"" + result[x - 1].idPOI + "\")'> More Info</button>").openPopup();
 
                                 }
                             }
@@ -51,26 +52,39 @@ window.onload = function () {
         })
     }
 
-/*-----------------------add names to side table-------------------------*/
+    /*-----------------------add names to side table-------------------------*/
 
     $.ajax({
         url: '/api/POI/location',
         method: 'get',
         success: function (result, status) {
+            var newLocs = [];
+
             console.log(latUser + " " + longUser);
             str = ''
             locs = document.getElementById("locs")
             for (x in result) {
-                locations.push([result[x].name, getDistance(latUser, longUser, result[x].latitude, result[x].longitude)])
-            }
-            locations.sort(function (a, b) {
-                return a[1] - b[1];
-            });
-            for (x in locations) {
-                str += '<tr><td>' + locations[x] + ' Km</td></tr>'
+                newLocs.push([result[x].idPOI, result[x].name, getDistance(latUser, longUser, result[x].latitude, result[x].longitude)])
             }
 
-            locs.innerHTML = str 
+            newLocs.sort(function (a, b) {
+                return a[1] - b[1];
+            });
+
+            arrayTitle = newLocs.map(function (x) {
+                return x[0];
+            });
+            arrayTitle2 = newLocs.map(function (x) {
+                return x[1];
+            });arrayTitle3 = newLocs.map(function (x) {
+                return x[2];
+            });
+            for (x in newLocs) {
+                str += '<tr><td><a style="color:darkgrey; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +"</a> - "+ arrayTitle3[x]+ ' Km</td></tr>'
+                console.log(result[x].idPOI)
+            }
+
+            locs.innerHTML = str
             console.log(locations)
         },
         error: function () {
@@ -86,6 +100,7 @@ function saveMonument(idPOI) {
     window.location.href = "info.html"
 
 }
+
 /*---------------------------------- get monument ID by name --------------------------------------------*/
 function procurar() {
     nome = document.getElementById("myInput").value
@@ -134,7 +149,7 @@ function deg2rad(deg) {
 
 function toggle() {
     var x = document.getElementById("tog");
-    if (document.getElementById("tog").innerHTML === "Closest To You") { 
+    if (document.getElementById("tog").innerHTML === "Closest To You") {
         $.ajax({
             url: '/api/POI/AvgRating',
             method: 'get',
@@ -142,7 +157,7 @@ function toggle() {
                 locs = document.getElementById("locs")
                 str = ''
                 for (x in result) {
-                    str += '<tr><td><a onclick="saveMonument(\''+result[x].POI_idPOI+ '\')">' + result[x].name +'</a> - '+ Math.round(result[x].media * 100) / 100 +'⭐</td></tr>'
+                    str += '<tr><td><a style="color:darkgrey; cursor:pointer" onclick="saveMonument(\'' + result[x].POI_idPOI + '\')">' + result[x].name + '</a> - ' + Math.round(result[x].media * 100) / 100 + '⭐</td></tr>'
                 }
                 locs.innerHTML = str
                 console.log(result)
@@ -151,28 +166,40 @@ function toggle() {
                 console.log('Error');
             }
         })
-    document.getElementById("tog").innerHTML = "Top Rated";
+        document.getElementById("tog").innerHTML = "Top Rated";
     } else {
         x.innerHTML = "Closest To You";
         $.ajax({
             url: '/api/POI/location',
             method: 'get',
             success: function (result, status) {
-                var newLocs=[];
+                var newLocs = [];
+
                 console.log(latUser + " " + longUser);
                 str = ''
                 locs = document.getElementById("locs")
                 for (x in result) {
-                    newLocs.push([result[x].name, getDistance(latUser, longUser, result[x].latitude, result[x].longitude)])
+                    newLocs.push([result[x].idPOI, result[x].name, getDistance(latUser, longUser, result[x].latitude, result[x].longitude)])
                 }
+
                 newLocs.sort(function (a, b) {
                     return a[1] - b[1];
                 });
+
+                arrayTitle = newLocs.map(function (x) {
+                    return x[0];
+                });
+                arrayTitle2 = newLocs.map(function (x) {
+                    return x[1];
+                });arrayTitle3 = newLocs.map(function (x) {
+                    return x[2];
+                });
                 for (x in newLocs) {
-                    str += '<tr><td>' + newLocs[x] + ' Km</td></tr>'
+                    str += '<tr><td><a style="color:darkgrey; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +"</a> - "+ arrayTitle3[x]+ ' Km</td></tr>'
+                    console.log(result[x].idPOI)
                 }
 
-                locs.innerHTML = str 
+                locs.innerHTML = str
                 console.log(locations)
             },
             error: function () {

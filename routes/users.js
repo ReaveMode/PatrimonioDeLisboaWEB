@@ -44,11 +44,12 @@ router.post('/register', function (req, res, next) {
   });
 });
 
-
-
-
-
-
+router.put('/updateProfile', function (req, res, next) {
+  id.updateUser(req.body, function (status, result) {
+    
+      res.send(result);
+  });
+});
 
 
 

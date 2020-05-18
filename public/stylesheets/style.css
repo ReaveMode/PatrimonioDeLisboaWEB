@@ -26,7 +26,7 @@ body {
     
 }
 .nav{
-  background-color: darkgoldenrod;
+  background-color: darkgray;
   padding:0px;
 }
 a {
@@ -134,7 +134,7 @@ img{
 .box{
   width: 240px;
   position: relative;
-  background: #4b86ca;
+  background: darkgray;
   height: 20px;
   border-radius: 40px;
   padding: 10px;
@@ -176,14 +176,14 @@ img{
   float: left;
   padding: 0;
   font-size: 16px;
-  color: #fff;
+  color: black;
   line-height: 20px;
   width: 240px;
 }
 
 .search-btn{
   margin-top: -25px;
-  color: #4a88c5;
+  color: black;
   float: right;
   width: 30px;
   height: 30px;
