@@ -91,6 +91,13 @@ router.get('/', function(req, res, next) {
   });
   
  
+  /* Gets Itinerary by User */
+
+  router.get('/itinerary/:ids', function(req, res, next){
+    id.getItinerary(req.params.ids, function(result, status){
+      res.send(result);
+    });
+  });
   
 
 

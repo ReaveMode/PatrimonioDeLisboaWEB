@@ -68,7 +68,7 @@ window.onload = function () {
             }
 
             newLocs.sort(function (a, b) {
-                return a[1] - b[1];
+                return a[2] - b[2];
             });
 
             arrayTitle = newLocs.map(function (x) {
@@ -183,7 +183,7 @@ function toggle() {
                 }
 
                 newLocs.sort(function (a, b) {
-                    return a[1] - b[1];
+                    return a[2] - b[2];
                 });
 
                 arrayTitle = newLocs.map(function (x) {

@@ -247,3 +247,16 @@ module.exports.updateUser = function (obj, callback, next) {
 
 
 
+module.exports.getItinerary = function (obj, callback, next) {
+
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("select idItinerary,User_idUser,POI_idPOI,POI.img,POI.description from Itinerary inner join POI on POI.idPOI=Itinerary.POI_idPOI where User_idUser = ?",[obj], function (err, rows) {
+            conn.release();
+            callback(rows);
+        })
+    })
+}
