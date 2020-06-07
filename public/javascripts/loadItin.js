@@ -7,9 +7,9 @@ window.onload = function(){
         success: function (result, status) {
             console.log(id)
             str = '';
-            var itinerary = document.getElementById("itin");
+            var itinerary = document.getElementById("paixao");
             for (x in result) {
-                    str += '<div class = "itinItems"><img src=' + result[x].img + 'style="list-style-type: none;"><p>' +result[x].description + '</p></div>'
+                    str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' +result[x].description + '</td></tr>'
             }
             itinerary.innerHTML = str
         },

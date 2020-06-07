@@ -28,23 +28,21 @@ window.onload = function () {
                         test.push(L.latLng(result[x].latitude, result[x].longitude))
 
                     }
-                    var waypoints = test;
-                    control = L.Routing.control({
-                        plan: L.Routing.plan(test, {
-                            createMarker: function (x, test, nWps) {
-                                if (x == 0) {
-                                    return L.circle(test.latLng, { draggable: false, color: 'Blue', fillColor: '#00008B', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').openPopup();
-                                }
-                                if (x >= 1) {
+                    console.log(test);
+                    for (x in test) {
+                        console.log(x);
+                        if (x == 0) {
+                            L.circle([test[x].lat, test[x].lng], { draggable: false, color: 'Blue', fillColor: '#00008B', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').addTo(map).openPopup();
+                        }
+                        if (x >= 1) {
 
-                                    return L.circle(test.latLng, { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<img src="+ result[x-1].img+" style='width:200px; height:100px;'><h2 id ='namesss'>" + result[x - 1].name + "</h2>" + "<button id ='loc' onclick = 'saveMonument(\"" + result[x - 1].idPOI + "\")'> More Info</button>").openPopup();
+                            L.circle([test[x].lat, test[x].lng], { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<img src=" + result[x - 1].img + " style='width:200px; height:100px;'><h2 id ='namesss'>" + result[x - 1].name + "</h2>" + "<button id ='loc' onclick = 'saveMonument(\"" + result[x - 1].idPOI + "\")'> More Info</button>", {autoClose: false, closeOnClick: false}).addTo(map);
 
-                                }
-                            }
-                        })
-
-                    }).addTo(map);
+                        }
+                    } 
+                    
                 },
+                
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(errorThrown);
                 }
@@ -76,11 +74,11 @@ window.onload = function () {
             });
             arrayTitle2 = newLocs.map(function (x) {
                 return x[1];
-            });arrayTitle3 = newLocs.map(function (x) {
+            }); arrayTitle3 = newLocs.map(function (x) {
                 return x[2];
             });
             for (x in newLocs) {
-                str += '<tr><td style="color:darkred; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +'</a> - '+ arrayTitle3[x]+ ' Km</td></tr>'
+                str += '<tr><td style="color:darkred; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] + '</a> - ' + arrayTitle3[x] + ' Km</td></tr>'
                 console.log(result[x].idPOI)
             }
 
@@ -191,11 +189,11 @@ function toggle() {
                 });
                 arrayTitle2 = newLocs.map(function (x) {
                     return x[1];
-                });arrayTitle3 = newLocs.map(function (x) {
+                }); arrayTitle3 = newLocs.map(function (x) {
                     return x[2];
                 });
                 for (x in newLocs) {
-                    str += '<tr><td style="color:darkred; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] +'</a> - '+ arrayTitle3[x]+ ' Km</td></tr>'
+                    str += '<tr><td style="color:darkred; cursor:pointer"><a style="color:black; cursor:pointer" onclick="saveMonument(\'' + arrayTitle[x] + '\')">' + arrayTitle2[x] + '</a> - ' + arrayTitle3[x] + ' Km</td></tr>'
                     console.log(result[x].idPOI)
                 }
 
