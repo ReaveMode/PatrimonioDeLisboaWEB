@@ -260,3 +260,40 @@ module.exports.getItinerary = function (obj, callback, next) {
         })
     })
 }
+
+
+module.exports.postItin = function (obj, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("insert into Itinerary (User_idUser, POI_idPOI) values (?,?)", [obj.idUser, obj.idPOI], function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "Invalid data input" }, null);
+            }
+        })
+    })
+}
+
+module.exports.removeItin = function (obj, callback, next) {
+    location.getConnection(function (err, conn) {
+        if (err) {
+            conn.release();
+            next(err);
+        }
+        else conn.query("delete from Itinerary where User_idUser = ? and POI_idPOI = ?", [obj.idUser, obj.idPOI], function (err, rows) {
+            conn.release();
+            if (!(rows.length === 0)) {
+                callback({ code: 200, status: "Ok" }, rows);
+            }
+            else {
+                callback({ code: 401, status: "Invalid data input" }, null);
+            }
+        })
+    })
+}

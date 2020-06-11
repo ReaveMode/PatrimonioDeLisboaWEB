@@ -100,6 +100,7 @@ $.ajax({
     method: 'get',
     success: function (result, status) {
         idUser = result[0].idUser;
+        
         console.log(idUser)
     },
     error: function () {
@@ -154,4 +155,21 @@ function rating(){
 }
 
 
-
+function postItin(){
+    $.ajax({
+        url: 'api/POI/itin',
+        method: 'post',
+        data:{
+            idPOI:localStorage.getItem("idPOI"),
+            idUser: idUser,
+        },
+        success: function(result,status){
+            alert('Adicionou ao Itinerário!')
+            window.location = "info.html"
+        },
+        error: function(jqXHR,textStatus,errorThrown ){
+            alert('Oops.... Não conseguimos adicionar ao Itinerário!')
+            console.log(errorThrown);
+        }
+    })
+}

@@ -99,9 +99,30 @@ router.get('/', function(req, res, next) {
     });
   });
   
+ /* add to Itinerary */
+ router.post('/itin', function (req, res, next) {
+  id.postItin(req.body, function (status, result) {
+    if (status.code == 200)
+      res.send(result);
+    else {
+      res.statusMessage = status.status;
+      res.status(status.code).send({});
+    }
+  });
+});
 
 
-
+ /* remove from Itinerary */
+ router.post('/delete', function (req, res, next) {
+  id.removeItin(req.body, function (status, result) {
+    if (status.code == 200)
+      res.send(result);
+    else {
+      res.statusMessage = status.status;
+      res.status(status.code).send({});
+    }
+  });
+});
 
 
 
