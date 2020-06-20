@@ -10,7 +10,7 @@ window.onload = function(){
             str = '';
             var itinerary = document.getElementById("paixao");
             for (x in result) {
-                    str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' +result[x].description + '<button onclick="remove(\''+result[x].POI_idPOI+'\')"> Remove</button>  <button> Directions</button></td></tr>'
+                    str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' +result[x].description + '<button onclick="remove(\''+result[x].POI_idPOI+'\')"> Remove</button>  <button onclick="directions(\''+result[x].POI_idPOI+'\')"> Directions</button></td></tr>'
                 }
             itinerary.innerHTML = str
         },
@@ -54,5 +54,14 @@ function remove(Poi){
             console.log(errorThrown);
         }
     })
+
+}
+
+
+function directions(idPOI) {
+    console.log(idPOI)
+    localStorage.setItem("idPOI", idPOI)
+    console.log(localStorage.getItem("idPOI"))
+    window.location.href = "directions.html"
 
 }

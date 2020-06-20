@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/directions.css' />
+    <script src="javascripts/directions.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <img src="/images/lisboa.jpg" alt="">
+    </div>
+    <div class ="nav">
+    <nav>
+        <ul>
+            <li><button id="profile"><a href="profile.html" style="color:black">Profile</a></button></li>
+            <li><button id="itinerary"><a href="itinerary.html" style="color:black">Itinerary</a></button></li>
+            <li><button id="login"><a href="login.html" style="color:black">Login</a></button></li>
+
+        </ul>
+    </div>
+        <script>
+            $(document).ready(function () {
+                var session = sessionStorage.getItem("username");
+                if (session == null) {
+                    $("#profile").hide();
+                    $("#itinerary").hide();
+                    $("#login").show();
+                } else {
+                    $("#profile").show();
+                    $("#itinerary").show();
+                    $("#login").hide();
+                }
+            });
+
+        </script>
+    
+        <div id="map">
+            <script src="javascripts/leaflet-routing-machine.js"></script>
+            <script src="javascripts/directions.js"></script>
+
+
+        </div>
+    </main>
+</body>
+
+</html>
