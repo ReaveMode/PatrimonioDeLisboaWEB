@@ -1,7 +1,7 @@
 var id = localStorage.getItem("idPOI");
 var idUser;
 
-window.onload = function(){
+window.onload = function () {
     $.ajax({
         url: '/api/POI/itinerary/' + id,
         method: 'get',
@@ -10,8 +10,8 @@ window.onload = function(){
             str = '';
             var itinerary = document.getElementById("paixao");
             for (x in result) {
-                    str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' +result[x].description + '<button onclick="remove(\''+result[x].POI_idPOI+'\')"> Remove</button>  <button onclick="directions(\''+result[x].POI_idPOI+'\')"> Directions</button></td></tr>'
-                }
+                str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' + result[x].description + '<button onclick="remove(\'' + result[x].POI_idPOI + '\')"> Remove</button>  <button onclick="directions(\'' + result[x].POI_idPOI + '\')"> Directions</button></td></tr>'
+            }
             itinerary.innerHTML = str
         },
         error: function () {
@@ -23,7 +23,7 @@ window.onload = function(){
         method: 'get',
         success: function (result, status) {
             idUser = result[0].idUser;
-            
+
             console.log(idUser)
         },
         error: function () {
@@ -36,20 +36,20 @@ window.onload = function(){
 }
 
 
-function remove(Poi){
+function remove(Poi) {
     $.ajax({
         url: 'api/POI/delete/',
         method: 'post',
-        data:{
+        data: {
             idUser: idUser,
-            idPOI:Poi, 
+            idPOI: Poi,
         },
-        success: function(result,status){
+        success: function (result, status) {
             console.log(sessionStorage.getItem("username"))
             alert('Apagou do Itinerário')
             window.location = "itinerary.html";
         },
-        error: function(jqXHR,textStatus,errorThrown ){
+        error: function (jqXHR, textStatus, errorThrown) {
             alert("Oops... Houve um problema!")
             console.log(errorThrown);
         }

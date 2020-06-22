@@ -1,15 +1,47 @@
+
+Button {
+	box-shadow: 2px 3px 0px 0px #899599;
+	background:linear-gradient(to bottom, white 5%, #a1a0a0 100%);
+	background-color:#ededed;
+	border-radius:15px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color:#3a8a9e;
+	font-family:Arial;
+	font-size:12px;
+	padding:8px 21px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #e1e2ed;
+  text-decoration:none;
+}
+Button:hover {
+	background:linear-gradient(to bottom, lightgray 5%, #a1a0a0 100%);
+	background-color: lightgray;
+  
+}
+Button:active {
+	position:relative;
+	top:1px;
+}
+
 nav ul {
     margin: 00px;
     font-size: 20px;
     padding: 10px;
     font-family: "Times New Roman", Times, serif;
     list-style-type: none;
+    background-color: darkgray;
   }
   
   nav ul li {
     display: inline;
     padding: 10px;
   
+  }
+  .nav{
+    background-color: darkgray;
+    padding:0px;
   }
   
   body {

@@ -26,18 +26,19 @@ window.onload = function () {
                     var test = [L.latLng(position.coords.latitude, position.coords.longitude)];
                     for (x in result) {
                         if(localStorage.getItem("idPOI") == result[x].idPOI)
-                            test.push(L.latLng(result[x].latitude, result[x].longitude, result[x].idPOI, result[x].img, result[x].name))
+                            test.push(L.latLng(result[x].latitude, result[x].longitude), result[x].idPOI, result[x].img, result[x].name)
 
                     }
-                    console.log(test);
+                    console.log(test[2]);
+                    
                     for (x in test) {
                         console.log(x);
                         if (x == 0) {
                             L.circle([test[x].lat, test[x].lng], { draggable: false, color: 'Blue', fillColor: '#00008B', fillOpacity: 0.3, radius: 50 }).bindPopup('Your Current Location').addTo(map).openPopup();
                         }
-                        if (x>=1) {
+                        if(x >=1) {
 
-                            L.circle([test[x].lat, test[x].lng], { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<img src=" + test[x].img + " style='width:200px; height:100px;'><h2 id ='namesss'>" + test[x].name + "</h2>", {autoClose: false, closeOnClick: false}).addTo(map);
+                            L.circle([test[x].lat, test[x].lng], { draggable: false, color: 'red', fillColor: '#f03', fillOpacity: 0.3, radius: 50 }).bindPopup("<img src=" + test[3] + " style='width:200px; height:100px;'><h2 id ='namesss'>" + test[4] + "</h2>", {autoClose: false, closeOnClick: false}).addTo(map);
 
                         }
                     } 
