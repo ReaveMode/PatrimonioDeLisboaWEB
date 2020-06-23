@@ -157,7 +157,7 @@ module.exports.getId = function (idUser, callback, next) {
             conn.release();
             next(err);
         }
-        else conn.query("SELECT idUser, name, email, country from User where email = ?", idUser, function (err, rows) {
+        else conn.query("SELECT idUser, name, email, country, img, password, location from User where email = ?", idUser, function (err, rows) {
             conn.release();
             if (!(rows.length === 0)) {
                 callback({ code: 200, status: "Ok" }, rows);
