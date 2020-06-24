@@ -2,34 +2,20 @@ var id = localStorage.getItem("idPOI");
 var idUser;
 
 window.onload = function () {
-    $.ajax({
-        url: '/api/POI/itinerary/' + id,
-        method: 'get',
-        success: function (result, status) {
-            console.log(id)
-            str = '';
-            var itinerary = document.getElementById("paixao");
-            for (x in result) {
-                str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' + result[x].description + '<button onclick="remove(\'' + result[x].POI_idPOI + '\')"> Remove</button>  <button onclick="directions(\'' + result[x].POI_idPOI + '\')"> Directions</button></td></tr>'
-            }
-            itinerary.innerHTML = str
-        },
-        error: function () {
-            console.log('Error');
-        }
-    })
-    $.ajax({
+     $.ajax({
         url: '/api/users/' + sessionStorage.getItem("username"),
         method: 'get',
         success: function (result, status) {
             idUser = result[0].idUser;
-
+            getItin(idUser);
             console.log(idUser)
         },
         error: function () {
             console.log('Error');
         }
     })
+   
+   
 
 
 
@@ -64,4 +50,24 @@ function directions(idPOI) {
     console.log(localStorage.getItem("idPOI"))
     window.location.href = "directions.html"
 
+}
+
+function getItin(idUser){
+    $.ajax({
+        url: '/api/POI/itinerary/' + idUser,
+        method: 'get',
+        success: function (result, status) {
+            console.log(idUser)
+            str = '';
+            var itinerary = document.getElementById("paixao");
+            for (x in result) {
+                
+                str += '<tr><td id = "imgTabela"><img src=' + result[x].img + '></td><td id = "descTabela">' + result[x].description + '<button onclick="remove(\'' + result[x].POI_idPOI + '\')"> Remove</button>  <button onclick="directions(\'' + result[x].POI_idPOI + '\')"> Directions</button></td></tr>'
+            }
+            itinerary.innerHTML = str
+        },
+        error: function () {
+            console.log('Error');
+        }
+    })
 }
