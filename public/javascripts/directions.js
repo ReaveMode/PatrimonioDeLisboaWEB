@@ -30,7 +30,17 @@ window.onload = function () {
 
                     }
                     console.log(test[2]);
-                    
+                    control = L.Routing.control({
+                        lineOptions: {styles: [{color: 'red', weight: 2}]},
+                        draggableWaypoints: false,
+                        routeWhileDragging: false,
+                        
+                        waypoints: [
+                            L.latLng(position.coords.latitude, position.coords.longitude),
+                            L.latLng(test[1].lat, test[1].lng)
+                        ]
+            
+                    }).addTo(map);
                     for (x in test) {
                         console.log(x);
                         if (x == 0) {
